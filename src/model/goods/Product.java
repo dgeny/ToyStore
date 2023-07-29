@@ -1,4 +1,4 @@
-package model;
+package model.goods;
 
 public abstract class Product {
     public Product(int sku, String shortName) {

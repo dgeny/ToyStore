@@ -1,5 +1,7 @@
 package model;
 
+import model.goods.Product;
+import model.goods.ProductCategory;
 
 public class Toy extends Product{
 

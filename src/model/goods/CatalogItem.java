@@ -1,5 +1,4 @@
-package model;
-
+package model.goods;
 
 /**
  * Товар в магазине

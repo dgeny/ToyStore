@@ -1,14 +1,12 @@
-package model;
+package model.goods;
 
 import java.util.ArrayList;
 
-public class Catalog {
+public class Catalog implements Iterable<CatalogItem> {
     /**
      * Товар в магазине
      */
-    private ArrayList<CatalogItem<Product> > products;
-    
-
+    private ArrayList<CatalogItem> products;
     /**
      * Внутренний метод для поиска товара
      * @param pItem элемент для поиска
@@ -26,9 +24,11 @@ public class Catalog {
     /**
      * Добавить продукт в каталог
      * @param product
+     * @throws Exception
       */
-    public void addProduct(CatalogItem<Product> product) {
-        this.products.add(product);
+    public void addProduct(CatalogItem<Product> product) throws Exception {
+        if(this.findProduct(product) < 0)
+            this.products.add(product);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Catalog {
     }
 
     /**
-     * Добавить некоторое количество продуктов 
+     * Добавить некоторое количество продукта 
      * @param product продукт
      * @param amount количество 
      * @throws Exception генерирует исключение, если продукт не найден
@@ -75,6 +75,11 @@ public class Catalog {
     public void changeProductPrice(CatalogItem<Product> product, double price) throws Exception{
         int pItem = findProduct(product);
         this.products.get(pItem).setPrice(price);
+    }
+    
+    @Override
+    public CatalogIterator<CatalogItem> iterator() {
+        return new CatalogIterator<CatalogItem>(this.products);
     }
 
 }
