@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class ProductCategories {
     private ArrayList<ProductCategory> categories;
 
+    public ProductCategories() {
+        this.categories = new ArrayList<>();
+    }
+
     public ArrayList<ProductCategory> getCategories() {
         return categories;
     }

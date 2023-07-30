@@ -2,6 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+import model.goods.Catalog;
+import model.goods.CatalogItem;
+import model.goods.ProductCategories;
+import model.goods.ProductCategory;
+
 
 
 public abstract class Store<T> {
@@ -14,6 +19,8 @@ public abstract class Store<T> {
     public Store(int id, String name) {
         this.id = id;
         this.name = name;
+        this.categories = new ProductCategories();
+        this.catalog = new Catalog();
     }
 
     /**

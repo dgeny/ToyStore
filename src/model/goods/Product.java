@@ -56,5 +56,17 @@ public abstract class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        if (((Product)obj).sku == this.sku && ((Product)obj).shortName == this.shortName)
+            return true;
+        return false;
+    }
 
 }

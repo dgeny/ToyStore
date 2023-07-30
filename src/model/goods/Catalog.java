@@ -6,29 +6,33 @@ public class Catalog implements Iterable<CatalogItem> {
     /**
      * Товар в магазине
      */
-    private ArrayList<CatalogItem> products;
+    private ArrayList<CatalogItem> products = new ArrayList<>();
     /**
      * Внутренний метод для поиска товара
      * @param pItem элемент для поиска
      * @return индекс элемента в каталоге
-     * @throws Exception генерирует исключение, если элемент не найден
       */
-    protected int findProduct(CatalogItem<Product> pItem) throws Exception{
+    protected int findProduct(CatalogItem<Product> pItem) {
         for (int i = 0; i < this.products.size(); i++) {
             if(this.products.get(i).equals(pItem)){
                 return i;
             }
         }
-        throw new Exception("Catalog item not found");
+        return -1;
     }
     /**
      * Добавить продукт в каталог
      * @param product
      * @throws Exception
       */
-    public void addProduct(CatalogItem<Product> product) throws Exception {
-        if(this.findProduct(product) < 0)
-            this.products.add(product);
+    public int addProduct(CatalogItem<Product> product) {
+        int productId = this.findProduct(product);
+        if (productId < 0) {
+            this.products.add(product); 
+        } else {
+            this.products.get(productId).setPrice(product.getPrice());
+        }
+        return this.products.size() - 1;
     }
 
     /**
@@ -38,7 +42,8 @@ public class Catalog implements Iterable<CatalogItem> {
       */
     public void deleteProduct(CatalogItem<Product> product) throws Exception{
         int deleted = findProduct(product);
-        if(deleted > -1) this.products.remove(deleted);        
+        if(deleted > -1) this.products.remove(deleted);
+        else throw new RuntimeException("Product not found");     
     }
 
     /**
@@ -47,10 +52,13 @@ public class Catalog implements Iterable<CatalogItem> {
      * @param amount количество 
      * @throws Exception генерирует исключение, если продукт не найден
       */
-    public void addProductAmount(CatalogItem<Product> product, double amount )  throws Exception{
+    public void addProductAmount(CatalogItem<Product> product, double amount ) {
         int pItem = findProduct(product);
+        if(pItem < 0){
+            pItem = this.addProduct(product);
+        }
         this.products.get(pItem).setAmount(
-        this.products.get(pItem).getAmount() + amount);
+            this.products.get(pItem).getAmount() + amount);
     }
 
     /**

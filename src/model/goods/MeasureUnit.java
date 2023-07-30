@@ -1,6 +1,6 @@
 package model.goods;
 
-enum MeasureUnit{
+public enum MeasureUnit{
     piece,
     gramm,
     kilogramm,

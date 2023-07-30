@@ -2,11 +2,12 @@ package model.clients;
 import java.util.ArrayList;
 
 
-public class ClientList {
 
-    private ArrayList<Client> clients;
+public class ClientList implements Iterable<Client> {
+
+    private final ArrayList<Client> clients = new ArrayList<>();
     public Client addClient(String firstName, String lastName, String phoneNumber){
-        Client cl = new Client(generateId(firstName, lastName, phoneNumber), firstName ,phoneNumber);
+        Client cl = new Client(generateId(firstName, lastName, phoneNumber), firstName, lastName ,phoneNumber);
         clients.add(cl);
         return cl;
     }
@@ -18,5 +19,23 @@ public class ClientList {
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
         return result;
+    }
+
+    @Override
+    public ClientIterator iterator() {
+        return new ClientIterator(this.clients);
+    }
+
+    @Override
+    public String toString() {
+        return "Список пользователей: " + this.clients.size() + " пользователей";
+    }
+
+    public int getCount(){
+        return this.clients.size();
+    }
+
+    public Client getClientByIndex(int index){
+        return this.clients.get(index);
     }
 }

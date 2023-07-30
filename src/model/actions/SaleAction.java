@@ -1,4 +1,4 @@
-package model;
+package model.actions;
 
 import model.goods.Product;
 

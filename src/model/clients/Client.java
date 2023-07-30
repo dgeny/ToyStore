@@ -12,16 +12,25 @@ public class Client {
     private String lastName;
     private String phoneNumber;
     
-    public Client(int clientId, String firstName, String phoneNumber) {
-        this.firstName = firstName;
-        this.phoneNumber = phoneNumber;
-    }
-    public Client(int clientId, String firstName, String surName, String lastName, String phoneNumber) {
-        this.firstName = firstName;
-        this.surName = surName;
+    
+    public Client(int clientId, String lastName, String phoneNumber) {
+        this.clientId = clientId;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
     }
+    
+    public Client(int clientId,String firstName, String lastName, String phoneNumber) {
+        this(clientId, lastName, phoneNumber);
+        this.firstName = firstName;
+    }
+
+
+    public Client(int clientId, String firstName, String surName, String lastName, String phoneNumber) {
+        this(clientId, firstName, lastName, phoneNumber);
+        this.surName = surName;
+    }
+    
+    
     public String getFirstName() {
         return firstName;
     }
@@ -48,7 +57,7 @@ public class Client {
     }
     @Override
     public String toString() {
-        return this.lastName + " " + this.firstName.charAt(0) + "." + this.surName.charAt(0) + ".";        
+        return String.format("%s %s.(%s)", this.lastName, this.firstName.charAt(0), this.phoneNumber); 
     }
     
     

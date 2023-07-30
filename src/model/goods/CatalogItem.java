@@ -5,6 +5,11 @@ package model.goods;
   */
 public class CatalogItem<T extends Product> {
     
+    public CatalogItem(CatalogItem item){
+        this.product = (T)item.getProduct();
+        this.price = item.getPrice();
+    }
+
     public CatalogItem(T product, double price) {
         this.product = product;
         this.price = price;
@@ -16,6 +21,10 @@ public class CatalogItem<T extends Product> {
      */
     private T product;
     
+    public T getProduct(){
+        return this.product;
+    }
+
     public ProductCategory getCategory(){
         return this.product.getCategory();
     }
@@ -62,6 +71,15 @@ public class CatalogItem<T extends Product> {
         } else if (!product.equals(other.product))
             return false;
         return true;
+    }
+    
+    public String getInfo(){
+        return this.product.getShortName();
+    }
+    
+    @Override
+    public String toString() {
+        return "CatalogItem [product=" + product.getShortName() + ", amount=" + amount + ", price=" + price + "]";
     }
     
 }
